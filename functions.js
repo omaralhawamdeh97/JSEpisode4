@@ -92,10 +92,10 @@ function titlesByAuthorName(authorName, authors, books) {
   let x = authors
     .filter((author) => author.name === authorName)
     .flatMap((authornamefiltered) => authornamefiltered.books);
-  console.log(x);
+  // console.log(x);
 }
 
-console.log(titlesByAuthorName("George R.R. Martin", authors, books));
+// console.log(titlesByAuthorName("George R.R. Martin", authors, books));
 
 /**************************************************************
  * mostProlificAuthor(authors):
@@ -105,9 +105,11 @@ console.log(titlesByAuthorName("George R.R. Martin", authors, books));
  * Note: assume there will never be a tie
  ****************************************************************/
 function mostProlificAuthor(authors) {
-  // Your code goes here
+  let arr = [authors.flatMap((author) => parseInt(author.books.length))];
+  let max = Math.max(arr);
+  console.log(max);
 }
-// console.log(mostProlificAuthor(authors));
+console.log(mostProlificAuthor(authors));
 
 /**************************************************************
  * relatedBooks(bookId, authors, books):
