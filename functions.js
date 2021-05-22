@@ -8,9 +8,8 @@ const books = require("./books.json");
  * - returns the book object that matches that id
  * - returns undefined if no matching book is found
  ****************************************************************/
-function getBookById(bookId, books) {
-  // Your code goes here
-}
+const getBookById = (bookId, books) => books.find((book) => book.id === bookId);
+
 // console.log(getBookById(12, books));
 
 /**************************************************************
@@ -20,9 +19,9 @@ function getBookById(bookId, books) {
  * - returns the author that matches that name (CASE INSENSITIVE)
  * - returns undefined if no matching author is found
  ****************************************************************/
-function getAuthorByName(authorName, authors) {
-  // Your code goes here
-}
+const getAuthorByName = (authorName, authors) =>
+  authors.find((author) => author.name === authorName);
+
 // console.log(getAuthorByName("J.K. Rowling", authors));
 
 /**************************************************************
@@ -31,9 +30,12 @@ function getAuthorByName(authorName, authors) {
  * - returns an array of objects with the format:
  *    [{ author: <NAME>, bookCount: <NUMBER_OF_BOOKS> }]
  ****************************************************************/
-function bookCountsByAuthor(authors) {
-  // Your code goes here
-}
+const bookCountsByAuthor = (authors) =>
+  authors.flatMap((author) => [
+    "{ author: " + author.name,
+    " bookCount: " + author.books.length + " }",
+  ]);
+
 // console.log(bookCountsByAuthor(authors));
 
 /**************************************************************
@@ -44,9 +46,35 @@ function bookCountsByAuthor(authors) {
  *    { <COLOR>: [<BOOK_TITLES>] }
  ****************************************************************/
 function booksByColor(books) {
-  const colors = {};
-
-  // Your code goes here
+  const colors = {
+    white: books
+      .filter((book) => book.color === "white")
+      .map((bookfiltered) => bookfiltered.title),
+    yellow: books
+      .filter((book) => book.color === "yellow")
+      .map((bookfiltered) => bookfiltered.title),
+    red: books
+      .filter((book) => book.color === "red")
+      .map((bookfiltered) => bookfiltered.title),
+    blue: books
+      .filter((book) => book.color === "blue")
+      .map((bookfiltered) => bookfiltered.title),
+    green: books
+      .filter((book) => book.color === "green")
+      .map((bookfiltered) => bookfiltered.title),
+    purple: books
+      .filter((book) => book.color === "purple")
+      .map((bookfiltered) => bookfiltered.title),
+    black: books
+      .filter((book) => book.color === "black")
+      .flatMap((bookfiltered) => bookfiltered.title),
+    grey: books
+      .filter((book) => book.color === "grey")
+      .map((bookfiltered) => bookfiltered.title),
+    orange: books
+      .filter((book) => book.color === "orange")
+      .flatMap((bookfiltered) => bookfiltered.title),
+  };
 
   return colors;
 }
@@ -61,9 +89,13 @@ function booksByColor(books) {
  *    ["The Hitchhikers Guide", "The Meaning of Liff"]
  ****************************************************************/
 function titlesByAuthorName(authorName, authors, books) {
-  // Your code goes here
+  let x = authors
+    .filter((author) => author.name === authorName)
+    .flatMap((authornamefiltered) => authornamefiltered.books);
+  console.log(x);
 }
-// console.log(titlesByAuthorName("George R.R. Martin", authors, books));
+
+console.log(titlesByAuthorName("George R.R. Martin", authors, books));
 
 /**************************************************************
  * mostProlificAuthor(authors):
